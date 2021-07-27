@@ -1,13 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from rest_framework import status
-from .serializers import kwhFemsTrans_serializer,kwhFemsPayload
+from .serializers import kwhFemsTrans_serializer,kwhFemsPayload_serializers
 from .models import FemsTrans, FemsPayload
 
 class addFemsTransData(APIView):
     def post(self, request):
         json_data = []
         for i in range(len(request.data['payload'])):
+            #받은 json 형식을 각 테이블에 올바른 방식으로 매핑해줌
             json_data1 = request.data
             json_data1 = dict({key: value for key, value in json_data1.items() if key != 'payload'})
 
@@ -27,5 +29,14 @@ class addFemsTransData(APIView):
             dev = FemsTrans.objects.get(site_id=json_data1['site_id'],dev_id=json_data1['dev_id'],dev_time=json_data1['dev_time'])
             FemsPayload.objects.create(payload_data = json_data2['payload_data'],site_id=json_data1['site_id'],dev_id=dev,dev_time=dev)
         return Response(request.data, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET'])
+def fems_datalist(request):
+    if request.method == 'GET':
+        qs_trans = FemsTrans.objects.all()
+        qs_payload = FemsPayload.objects.all()
+        serializer = kwhFemsTrans_serializer(qs_trans, many=True)
+        serializer_p = kwhFemsPayload_serializers(qs_payload,many=True)
 
+        return Response(serializer.data+serializer_p.data)
+    return Response(kwhFemsPayload_serializers.errors, status=400)
 

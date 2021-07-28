@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-*=1n91$-i8diz^&*amv@rpr5%0$(50sb5-17t(t@^vgd@9%qj)'
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1','0.0.0.0','211.43.13.109']
 
 
 # Application definition
@@ -77,14 +77,12 @@ WSGI_APPLICATION = 'femsapi.wsgi.application'
 
 DATABASES = {
     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fems_data_for_test',
+        'NAME': 'fems_data',
         'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '',
-        'PORT':  ''
+        'PASSWORD': 'pwd123',
+        'HOST': 'mariadb_mju',
+        'PORT':  '13306'
     }
 }
 

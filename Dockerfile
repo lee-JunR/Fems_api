@@ -1,5 +1,7 @@
 FROM python:3.8.8
 
+RUN echo "hello"
+
 WORKDIR /home/
 
 RUN git clone https://github.com/lee-JunR/Fems_api

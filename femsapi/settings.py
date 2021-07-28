@@ -74,17 +74,22 @@ WSGI_APPLICATION = 'femsapi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fems_data',
-        'USER': 'root',
-        'PASSWORD': 'pwd123',
-        'HOST': 'mariadb_mju',
-        'PORT':  '13306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'fems_data',
+#         'USER': 'root',
+#         'PASSWORD': 'pwd123',
+#         'HOST': 'mariadb_mju',
+#         'PORT':  '13306'
+#     }
+# }
 
 
 
